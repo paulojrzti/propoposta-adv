@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proposta de Parceria Estratégica | SEO Jurídico</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --panel: #171a21;
+      --panel-2: #1f2430;
+      --text: #f4f1ea;
+      --muted: #b8b2a7;
+      --line: rgba(255,255,255,.12);
+      --accent: #b5362e;
+      --accent-2: #e7c78c;
+      --green: #55d68b;
+      --shadow: 0 30px 80px rgba(0,0,0,.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      background: radial-gradient(circle at top right, rgba(181,54,46,.18), transparent 28%),
+                  radial-gradient(circle at bottom left, rgba(231,199,140,.10), transparent 32%),
+                  var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow: hidden;
+    }
+
+    .deck {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 56px 72px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide.active { display: flex; }
+
+    .card {
+      width: min(1180px, 100%);
+      min-height: 620px;
+      background: linear-gradient(145deg, rgba(31,36,48,.96), rgba(18,20,26,.96));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 30px;
+      padding: 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      right: -140px;
+      top: -140px;
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(circle, rgba(181,54,46,.28), transparent 65%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1, h2 {
+      margin: 0;
+      letter-spacing: -0.045em;
+      line-height: 0.95;
+      max-width: 980px;
+    }
+
+    h1 {
+      font-size: clamp(54px, 7vw, 92px);
+    }
+
+    h2 {
+      font-size: clamp(42px, 5.2vw, 72px);
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 22px;
+      line-height: 1.45;
+      max-width: 860px;
+    }
+
+    .highlight { color: var(--text); }
+    .red { color: var(--accent); }
+    .gold { color: var(--accent-2); }
+    .green { color: var(--green); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    .mini {
+      background: rgba(255,255,255,.045);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 26px;
+    }
+
+    .mini h3 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      letter-spacing: -0.03em;
+    }
+
+    .mini p {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .timeline {
+      margin-top: 46px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+    }
+
+    .phase {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px;
+      background: rgba(255,255,255,.045);
+      position: relative;
+    }
+
+    .phase strong {
+      display: block;
+      font-size: 48px;
+      color: var(--accent-2);
+      margin-bottom: 12px;
+    }
+
+    .phase span {
+      display: block;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted);
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+
+    .phase p {
+      font-size: 17px;
+      margin: 0;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 34px;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      font-size: 17px;
+    }
+
+    th, td {
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(255,255,255,.07);
+      color: var(--accent-2);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .quote {
+      margin-top: 36px;
+      padding: 32px;
+      border-left: 5px solid var(--accent);
+      background: rgba(181,54,46,.10);
+      border-radius: 18px;
+      font-size: 28px;
+      line-height: 1.28;
+      letter-spacing: -0.03em;
+      max-width: 980px;
+    }
+
+    .quote small {
+      display: block;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+
+    .footer {
+      position: absolute;
+      left: 56px;
+      right: 56px;
+      bottom: 28px;
+      display: flex;
+      justify-content: space-between;
+      color: rgba(244,241,234,.55);
+      font-size: 14px;
+    }
+
+    .controls {
+      position: fixed;
+      right: 26px;
+      bottom: 24px;
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    button {
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 12px 16px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+    }
+
+    button:hover { background: rgba(255,255,255,.14); }
+
+    .progress {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      width: 0%;
+      z-index: 20;
+      transition: width .25s ease;
+    }
+
+    ul {
+      margin-top: 28px;
+      padding-left: 22px;
+      color: var(--muted);
+      font-size: 21px;
+      line-height: 1.55;
+      max-width: 920px;
+    }
+
+    li + li { margin-top: 14px; }
+
+    @media (max-width: 800px) {
+      body { overflow: auto; }
+      .deck { height: auto; }
+      .slide {
+        position: relative;
+        display: flex;
+        min-height: 100vh;
+        padding: 22px;
+      }
+      .slide:not(.active) { display: none; }
+      .card { min-height: auto; padding: 32px 24px; }
+      .grid, .timeline { grid-template-columns: 1fr; }
+      table { font-size: 14px; }
+      th, td { padding: 12px; }
+      p, ul { font-size: 18px; }
+      .quote { font-size: 22px; }
+      .footer { position: static; margin-top: 42px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck">
+
+    <section class="slide active">
+      <div class="card">
+        <div class="eyebrow"></div>
+        <h1>Construção de ativo digital e aquisição de clientes para escritório jurídico.</h1>
+        <p>Um modelo de crescimento em que o escritório não compra “um site”. Ele passa a operar um canal de aquisição orgânica no Google, com risco inicial reduzido e remuneração vinculada ao resultado.</p>
+        <div class="footer"><span>Parceria Estratégica</span><span>01</span></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="card">
+        <div class="eyebrow">O ponto central</div>
+        <h2>Não estamos falando de tecnologia. Estamos falando de <span class="red">CAC</span>.</h2>
+        <p>O objetivo é reduzir o custo de aquisição de clientes qualificados. Em vez de depender de anúncios cada vez mais caros, o escritório constrói um ativo que pode gerar demanda de forma acumulativa.</p>
+        <div class="grid">
+          <div class="mini">
+            <h3>Tráfego pago</h3>
+            <p>Aluguel de atenção. Parou de pagar, o fluxo para.</p>
+          </div>
+          <div class="mini">
+            <h3>SEO</h3>
+            <p>Ativo de aquisição. O resultado amadurece e pode se acumular.</p>
+          </div>
+        </div>
+        <div class="footer"><span></span><span>02</span></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="card">
+        <div class="eyebrow">Como o mercado funciona</div>
+        <h2>Existem dois caminhos para gerar clientes qualificados hoje.</h2>
+        <div class="grid">
+          <div class="mini">
+            <h3>1. Anúncios</h3>
+            <p>Investimento mensal recorrente, leilão de cliques, concorrência direta e risco de pagar sem fechar contratos.</p>
+          </div>
+          <div class="mini">
+            <h3>2. Posicionamento orgânico</h3>
+            <p>Construção de autoridade, conteúdo, páginas estratégicas e presença local para capturar quem já está procurando.</p>
+          </div>
+        </div>
+        <p><span class="highlight">A diferença:</span> no anúncio, o escritório paga antes de vender. No nosso modelo, a remuneração só acontece quando existe contrato fechado vindo do canal.</p>
+        <div class="footer"><span></span><span>03</span></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="card">
+        <div class="eyebrow">Modelo proposto</div>
+        <h2>Comissão degradativa até estabilizar em <span class="gold">10%</span>.</h2>
+        <div class="timeline">
+          <div class="phase">
+            <span>Fase 1 • Tração</span>
+            <strong>20%</strong>
+            <p>Até R$ 15.000 em comissões acumuladas. Compensa o risco inicial de desenvolvimento, SEO técnico, conteúdo e estrutura.</p>
+          </div>
+          <div class="phase">
+            <span>Fase 2 • Maturidade</span>
+            <strong>15%</strong>
+            <p>De R$ 15.001 até R$ 30.000 acumulados. O ativo começa a ganhar autoridade e previsibilidade.</p>
+          </div>
+          <div class="phase">
+            <span>Fase 3 • Estabilização</span>
+            <strong>10%</strong>
+            <p>Acima de R$ 30.000 acumulados. Taxa de manutenção, otimização, proteção técnica e continuidade do canal.</p>
+          </div>
+        </div>
+        <div class="footer"><span></span><span>04</span></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="card">
+        <div class="eyebrow">Por que os 10% fazem sentido?</div>
+        <h2>Porque o escritório paga apenas sobre um contrato que já entrou.</h2>
+        <table>
+          <tr>
+            <th>Métrica</th>
+            <th>Anúncios</th>
+            <th>SEO na fase 3</th>
+          </tr>
+          <tr>
+            <td>Custo</td>
+            <td>Verba mensal recorrente</td>
+            <td>10% apenas sobre contrato fechado</td>
+          </tr>
+          <tr>
+            <td>Risco</td>
+            <td>Alto: paga antes de vender</td>
+            <td>Baixo: remunera depois do resultado</td>
+          </tr>
+          <tr>
+            <td>Fluxo</td>
+            <td>Para quando a verba para</td>
+            <td>Continua sendo trabalhado como ativo</td>
+          </tr>
+          <tr>
+            <td>Qualidade</td>
+            <td>Pode atrair curiosos e leads frios</td>
+            <td>Captura demanda com intenção real de busca</td>
+          </tr>
+        </table>
+        <div class="footer"><span></span><span>05</span></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="card">
+        <div class="eyebrow">Analogia jurídica</div>
+        <h2>O canal funciona como uma <span class="red">indicação digital</span>.</h2>
+        <p>No jurídico, é comum valorizar quem origina uma oportunidade qualificada. A lógica aqui é parecida: o ativo digital atua como um indicador permanente, filtrando pessoas com intenção real de contratação e direcionando ao escritório.</p>
+        <div class="quote">
+          “Se uma indicação de relacionamento pode ser remunerada porque trouxe uma causa, por que uma indicação gerada por um ativo construído, mantido e otimizado não teria valor?”
+        </div>
+        <div class="footer"><span></span><span>06</span></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="card">
+        <div class="eyebrow">Analogia financeira</div>
+        <h2>Anúncio é aluguel. SEO é construção de sede própria.</h2>
+        <div class="grid">
+          <div class="mini">
+            <h3>Ads = aluguel</h3>
+            <p>Enquanto o escritório paga, aparece. Quando para, o canal desaparece imediatamente.</p>
+          </div>
+          <div class="mini">
+            <h3>SEO = ativo</h3>
+            <p>O trabalho fortalece páginas, autoridade, conteúdo e presença local. O resultado pode se acumular.</p>
+          </div>
+        </div>
+        <p>Os 10% não são “pagamento por um site pronto”. São a taxa de gestão e proteção do canal de aquisição orgânica.</p>
+        <div class="footer"><span></span><span>07</span></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="card">
+        <div class="eyebrow">Comparação direta</div>
+        <h2>O modelo reduz o risco e preserva caixa.</h2>
+        <table>
+          <tr>
+            <th>Canal</th>
+            <th>Custo</th>
+            <th>Risco</th>
+            <th>Fluxo</th>
+          </tr>
+          <tr>
+            <td>Indicação de colega</td>
+            <td>20% a 30%</td>
+            <td>Baixo</td>
+            <td>Instável</td>
+          </tr>
+          <tr>
+            <td>Google/Meta Ads</td>
+            <td>Verba mensal + gestão</td>
+            <td>Alto</td>
+            <td>Depende de investimento contínuo</td>
+          </tr>
+          <tr>
+            <td><strong>SEO por performance</strong></td>
+            <td><strong>10% após maturação</strong></td>
+            <td><strong>Baixo</strong></td>
+            <td><strong>Ativo crescente e gerenciado</strong></td>
+          </tr>
+        </table>
+        <div class="footer"><span></span><span>08</span></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="card">
+        <div class="eyebrow">Governança e segurança</div>
+        <h2>Estrutura pensada para previsibilidade, rastreabilidade e compliance.</h2>
+        <ul>
+          <li>O canal será tratado como fonte de aquisição rastreável, com origem dos leads monitorada.</li>
+          <li>A remuneração incide apenas sobre contratos fechados e atribuídos ao canal digital.</li>
+          <li>O conteúdo segue uma lógica informativa, institucional e de autoridade, evitando comunicação agressiva ou mercantilizada.</li>
+          <li>A gestão contínua protege o ativo contra perda de posição, problemas técnicos e avanço da concorrência.</li>
+        </ul>
+        <div class="footer"><span></span><span>09</span></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="card">
+        <div class="eyebrow">Fechamento</div>
+        <h2>Melhor ter 90% de um contrato que não existiria, ou 100% de um site que ninguém visita?</h2>
+        <div class="quote">
+          “Pensem no meu trabalho não como um custo de TI, mas como um corretor de causas digital: ele só recebe quando vocês recebem, e cobra uma das menores taxas possíveis para aquisição qualificada.”
+          
+        </div>
+        <div class="footer"><span></span><span>10</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="controls">
+    <button onclick="prevSlide()">← Anterior</button>
+    <button onclick="nextSlide()">Próximo →</button>
+  </div>
+  <div class="progress" id="progress"></div>
+
+  <script>
+    const slides = [...document.querySelectorAll('.slide')];
+    const progress = document.getElementById('progress');
+    let current = 0;
+
+    function showSlide(index) {
+      current = Math.max(0, Math.min(index, slides.length - 1));
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
+      progress.style.width = ((current + 1) / slides.length * 100) + '%';
+    }
+
+    function nextSlide() { showSlide(current + 1); }
+    function prevSlide() { showSlide(current - 1); }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    showSlide(0);
+  </script>
+</body>
+</html>
